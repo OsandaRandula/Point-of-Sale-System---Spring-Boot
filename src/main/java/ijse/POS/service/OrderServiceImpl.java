@@ -123,6 +123,20 @@ public class OrderServiceImpl implements OrderService {
         orderDetailsRepository.deleteById(orderDetailId);
 
     }
+
+    @Override
+    public Orders confirmOrder(Long orderId) {
+        
+        Orders order = orderRepository.findById(orderId).orElse(null);
+        if(order ==null){
+            return null;
+        }
+
+        order.setStatus(true);
+
+        return orderRepository.save(order);
+
+    }
         
 
 

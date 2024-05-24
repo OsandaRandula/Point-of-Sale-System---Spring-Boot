@@ -32,19 +32,19 @@ public class ItemController {
     private ItemCategoryService itemCategoryService;
 
 
-    @GetMapping("/auth/items")
+    @GetMapping("/items")
     public List<Item> getItems(){
         return itemService.findAllItems();
     }
 
-    @GetMapping("/auth/items/{itemCode}")
+    @GetMapping("/items/{itemCode}")
     public Item getItemById(@PathVariable String itemCode){
 
         return itemService.findByItemCode(itemCode);
     }
 
 
-    @PostMapping("/auth/items")
+    @PostMapping("/items")
     public ResponseEntity<Item> saveItem(@RequestBody ItemDto itemDto){
 
 
@@ -60,13 +60,13 @@ public class ItemController {
 
     }
 
-    @DeleteMapping("/auth/items/{itemCode}")
+    @DeleteMapping("/items/{itemCode}")
     public void deleteItem(@PathVariable String itemCode){
 
         itemService.deleteByItemCode(itemCode);
     }
 
-    @PutMapping("/auth/items/{itemCode}")
+    @PutMapping("/items/{itemCode}")
     public Item updateItem(@RequestBody ItemDto itemDto , @PathVariable String itemCode){
 
         ItemCategory itemCategory = itemCategoryService.getItemCategoryById(itemDto.getCategoryId());
@@ -76,7 +76,7 @@ public class ItemController {
         item.setItemName(itemDto.getItemName());
         item.setItemCategory(itemCategory);
 
-        return itemService.saveItem(item);
+        return itemService.updateItem(item, item.getItemCode());
 
     }
     

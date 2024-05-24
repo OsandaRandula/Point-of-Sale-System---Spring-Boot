@@ -27,7 +27,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("auth/users/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         if(user != null) {
@@ -37,14 +37,14 @@ public class UserController {
         }
     }
 
-    @PostMapping("auth/users")
+    @PostMapping("/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User createdUser = userService.createUser(user);
 
         return ResponseEntity.status(201).body(createdUser);
     }
 
-    @PutMapping("/auth/users/{id}")
+    @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         User updateUser = userService.updateUser(id, user);
 
@@ -55,7 +55,7 @@ public class UserController {
         }
     }
     
-    @DeleteMapping("/auth/users/{id}")
+    @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }

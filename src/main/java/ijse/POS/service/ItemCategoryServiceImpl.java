@@ -39,5 +39,20 @@ public class ItemCategoryServiceImpl implements ItemCategoryService{
         itemCategoryRepository.deleteById(id);
     }
 
+    @Override
+    public ItemCategory updateCategory(Long id, ItemCategory itemCategory) {
+
+        ItemCategory updatedCategory = itemCategoryRepository.findById(id).orElse(null);
+        if(updatedCategory == null){
+            return null;
+        }
+
+        updatedCategory.setCategoryName(itemCategory.getCategoryName());
+
+        return itemCategoryRepository.save(updatedCategory);
+
+
+     }
+
    
 }

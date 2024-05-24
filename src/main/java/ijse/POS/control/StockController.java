@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,18 +27,18 @@ public class StockController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/auth/stocks")
+    @GetMapping("/stocks")
     public List<Stock> getstocks(){
         return stockService.findAllStock();
     }
 
-    @GetMapping("/auth/stocks/{itemCode}")
+    @GetMapping("/stocks/{itemCode}")
     public Stock getstockById(@PathVariable String itemCode){
 
         return stockService.findByStockId(itemCode);
     }
 
-    @PostMapping("/auth/stocks")
+    @PostMapping("/stocks")
     public Stock saveStock(@RequestBody StockDto stockDto){
 
         Item item = itemService.findByItemCode(stockDto.getItemCode());
@@ -54,7 +53,7 @@ public class StockController {
 
     }
 
-    @PutMapping("/auth/stocks/{itemCode}")
+    @PutMapping("/stocks/{itemCode}")
     public Stock updateStock( @RequestBody StockDto stockDto, @PathVariable String itemCode){
 
         Item item = itemService.findByItemCode(stockDto.getItemCode());
